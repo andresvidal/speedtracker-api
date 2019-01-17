@@ -1,6 +1,14 @@
 # Build
 
-docker build -t andresvidal/speedtracker-api .
+    docker build -t andresvidal/speedtracker-api .
+
+## Build for ARM devices
+
+    curl https://raw.githubusercontent.com/andresvidal/speedtracker-api/debug/Dockerfile.arm32v7 | docker build -f - .
+
+or locally:
+
+    docker build -f Dockerfile.arm32v7 -t andresvidal/speedtracker-api:arm32v7 .
 
 # Run
 
