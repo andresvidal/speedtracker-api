@@ -1,0 +1,9 @@
+FROM arm32v7/node
+
+EXPOSE 8089
+WORKDIR /app
+COPY . .
+
+RUN npm install
+
+CMD ["npm","start"]
