@@ -7,7 +7,13 @@ const crypto = require('crypto')
 const Database = require('./lib/Database')
 const ErrorHandler = require('./lib/ErrorHandler')
 const express = require('express')
-const GitHub = require('./lib/GitHub')
+
+// https://github.com/octokit/rest.js/releases/tag/v14.0.0
+// Kept the const name github for better context
+//const GitHub = require('./lib/GitHub')
+// TODO: update using the ./lib/Github methods
+const GitHub = require('@octokit/rest')
+
 const Scheduler = require('./lib/Scheduler')
 const SpeedTracker = require('./lib/SpeedTracker')
 
@@ -31,7 +37,7 @@ let scheduler
 
 const github = new GitHub()
 
-github.authenticate(config.get('githubToken'))
+github.authenticate({type: 'token', token: config.get('githubToken')})
 
 // ------------------------------------
 // DB connection
@@ -63,7 +69,7 @@ const testHandler = (req, res) => {
 
     return res.status(429).send()
   }
-
+  
   const speedtracker = new SpeedTracker({
     db,
     branch: req.params.branch,
@@ -93,11 +99,11 @@ server.post('/v1/test/:user/:repo/:branch/:profile', testHandler)
 // ------------------------------------
 
 server.get('/v1/connect/:user/:repo', (req, res) => {
-  const github = new GitHub(GitHub.GITHUB_CONNECT)
+  const github = new GitHub()
 
-  github.authenticate(config.get('githubToken'))
+  github.authenticate({type: 'token', token: config.get('githubToken')})
 
-  github.api.users.getRepoInvites({}).then(response => {
+    github.repos.listInvitations({'owner':req.params.user, 'repo':req.params.repo}).then(response => {
     let invitationId
     let invitation = response.some(invitation => {
       if (invitation.repository.full_name === (req.params.user + '/' + req.params.repo)) {
@@ -108,7 +114,7 @@ server.get('/v1/connect/:user/:repo', (req, res) => {
     })
 
     if (invitation) {
-      return github.api.users.acceptRepoInvite({
+      return github.repos.acceptInvitation({
         id: invitationId
       })        
     } else {
