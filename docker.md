@@ -53,4 +53,4 @@ and run:
 
 # Test 
 
-    http://<server-ip>:8080/v1/test/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROFILE}?key={KEY}
+    http://<server-ip>:8089/v1/test/{USERNAME}/{REPOSITORY}/{BRANCH}/{PROFILE}?key={KEY}
