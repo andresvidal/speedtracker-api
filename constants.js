@@ -102,6 +102,12 @@ module.exports = {
       unit: 's',
       description: 'The time it takes for the server to respond with the first byte of the response'
     },
+    TTFI: {
+      name: 'First Interactive',
+      transform: (value) => (value / 1000).toFixed(2),
+      unit: 's',
+      description: 'This is a newer metric and reports when the page is first expected to be usable and will respond to input quickly (with the possibility of slow responses as more content loads).'
+    },
     visualComplete: {
       name: 'Visually complete',
       transform: (value) => (value / 1000).toFixed(2),
