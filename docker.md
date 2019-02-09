@@ -23,6 +23,7 @@ and run:
     -e "WPT_KEY=..." \
     -e "GITHUB_TOKEN=..." \
     -e "PAGESPEED_API_KEY=..." \
+    -e "SCHEDULING_MIN_INTERVAL=6" \
     -e "MONGODB_URI=..." \
     andresvidal/speedtracker-api:latest
 

@@ -108,6 +108,24 @@ module.exports = {
       unit: 's',
       description: 'This is a newer metric and reports when the page is first expected to be usable and will respond to input quickly (with the possibility of slow responses as more content loads).'
     },
+    TimeToInteractive: {
+      name: 'Time to Interactive',
+      transform: (value) => (value / 1000).toFixed(2),
+      unit: 's',
+      description: 'TTI measures the time until the page being loaded is considered usable and will respond to user input.'
+    },
+    firstContentfulPaint: {
+      name: 'First Contentful Paint',
+      transform: (value) => (value / 1000).toFixed(2),
+      unit: 's',
+      description: 'The point in time when the first image or text is rendered to the screen (something other than background colors).'
+    },
+    firstMeaningfulPaint: {
+      name: 'First Contentful Paint',
+      transform: (value) => (value / 1000).toFixed(2),
+      unit: 's',
+      description: 'First Meaningful Paint is essentially the paint after which the biggest above-the-fold layout change has happened, and web fonts have loaded.'
+    },
     visualComplete: {
       name: 'Visually complete',
       transform: (value) => (value / 1000).toFixed(2),
